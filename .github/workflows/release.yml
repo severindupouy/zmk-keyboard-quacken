@@ -43,7 +43,7 @@ jobs:
           sed -i "/name: zmk-config-aekeynox/,/revision:/ s|revision: .*|revision: $REF|" config/west.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -qam "chore(release): $VERSION (Ækeynox $REF)"
+          git commit -qa --allow-empty -m "chore(release): $VERSION (Ækeynox $REF)"
           git tag "$VERSION"
           git push origin "HEAD:${{ github.ref_name }}" "$VERSION"
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
@@ -88,7 +88,7 @@ jobs:
 
       # manifest.lock.yml: the exact commit of every module of this release
       - if: ${{ matrix.target == 'flex' && matrix.layout == 'qwerty' && matrix.os == 'pc' }}
-        run: west manifest --freeze > manifest.lock.yml
+        run: west manifest --freeze --active-only > manifest.lock.yml
         working-directory: quacken
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

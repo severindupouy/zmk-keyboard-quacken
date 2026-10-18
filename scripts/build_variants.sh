@@ -10,7 +10,7 @@ OS=$3     # pc | mac
 
 QUACKEN_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 OUT_DIR=${OUT_DIR:-$PWD}
-BUILD_DIR=${BUILD_DIR:-$PWD/build}
+BUILD_DIR=${BUILD_DIR:-$(mktemp -d)}
 
 case $TARGET in
 flex) BOARD=(-b quacken_flex); SHIELD=() ;;
