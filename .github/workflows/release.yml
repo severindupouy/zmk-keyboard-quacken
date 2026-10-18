@@ -69,30 +69,34 @@ jobs:
         continue-on-error: true
         with:
           path: |
-            modules/
-            tools/
-            zephyr/
-            zmk/
+            quacken/modules/
+            quacken/tools/
+            quacken/zephyr/
+            quacken/zmk/
           key: west-${{ hashFiles('quacken/config/west.yml') }}
 
+      # west workspace: parent of the manifest directory, i.e. quacken/
       - run: |
           west init -l quacken/config
+          cd quacken
           west update --fetch-opt=--filter=tree:0
           west zephyr-export
 
-      - run: quacken/scripts/build_variants.sh ${{ matrix.target }} ${{ matrix.layout }} ${{ matrix.os }}
+      - run: scripts/build_variants.sh ${{ matrix.target }} ${{ matrix.layout }} ${{ matrix.os }}
+        working-directory: quacken
         shell: bash
 
       # manifest.lock.yml: the exact commit of every module of this release
       - if: ${{ matrix.target == 'flex' && matrix.layout == 'qwerty' && matrix.os == 'pc' }}
         run: west manifest --freeze > manifest.lock.yml
+        working-directory: quacken
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: ${{ matrix.target }}-${{ matrix.layout }}-${{ matrix.os }}
           path: |
-            *.zip
-            manifest.lock.yml
+            quacken/*.zip
+            quacken/manifest.lock.yml
 
   publish:
     needs: [prepare, build]
