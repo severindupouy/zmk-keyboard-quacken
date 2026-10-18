@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Builds the 8 firmware variants of one target/layout/OS and zips them.
-# Run from the root of a west workspace initialized with `west init -l <quacken>/config`.
+# Run from the root of a west workspace separate from this repo, initialized from a copy
+# of its config/: `mkdir ws && cp -R <quacken>/config ws/ && cd ws && west init -l config && west update`.
 # Output: $OUT_DIR/zmk_quacken_<target>_<layout>.<os>.zip
 set -euo pipefail
 

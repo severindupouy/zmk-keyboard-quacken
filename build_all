@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Local build of the release firmwares for one target and layout, PC and Mac.
-# Run from the root of a west workspace initialized with `west init -l <quacken>/config`.
+# Run from the root of a west workspace separate from this repo, initialized from a copy
+# of its config/: `mkdir ws && cp -R <quacken>/config ws/ && cd ws && west init -l config && west update`.
 set -euo pipefail
 
 if [ $# -ne 2 ]; then
