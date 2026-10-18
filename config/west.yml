@@ -8,7 +8,7 @@ manifest:
   projects:
     - name: zmk-config-aekeynox
       remote: OneDeadKey
-      revision: main
+      revision: demo
       import:
         file: config/west.yml
         # Ækeynox references its own copy of this repo: build with the boards of this commit
