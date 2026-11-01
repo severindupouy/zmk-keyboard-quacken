@@ -4,7 +4,7 @@
 manifest:
   remotes:
     - name: OneDeadKey
-      url-base: https://github.com/OneDeadKey
+      url-base: https://github.com/severindupouy
   projects:
     - name: zmk-config-aekeynox
       remote: OneDeadKey
